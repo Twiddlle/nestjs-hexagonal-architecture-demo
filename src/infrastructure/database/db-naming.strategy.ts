@@ -5,7 +5,7 @@ export class DbNamingStrategy
   extends DefaultNamingStrategy
   implements NamingStrategyInterface
 {
-  tableName(targetName: string): string {
+  public tableName(targetName: string): string {
     return pluralize(targetName);
   }
 }

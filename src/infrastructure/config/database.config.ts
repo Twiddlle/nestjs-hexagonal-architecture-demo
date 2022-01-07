@@ -1,7 +1,7 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import path from 'path';
 import { get } from 'env-var';
-import { DbNamingStrategy } from '../database/DbNamingStrategy';
+import { DbNamingStrategy } from '../database/db-naming.strategy';
 import { TypeOrmOptionsFactory } from '@nestjs/typeorm/dist/interfaces/typeorm-options.interface';
 
 export class DatabaseConfig implements TypeOrmOptionsFactory {
