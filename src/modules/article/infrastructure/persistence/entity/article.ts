@@ -1,7 +1,8 @@
-import { ArticleEntity } from '../domain/entities/article.entity';
-import { Column, PrimaryGeneratedColumn } from 'typeorm';
+import { ArticleEntity } from '../../../domain/entities/article.entity';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-export class ArticleOrmEntity extends ArticleEntity {
+@Entity()
+export class Article extends ArticleEntity {
   @PrimaryGeneratedColumn()
   public id: number;
 

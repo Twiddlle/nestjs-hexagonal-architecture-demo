@@ -1,16 +1,13 @@
-import {
-  RepositoryPort,
-  RepositoryQuery,
-} from '../../../domain/ports/repository.port';
+import { RepositoryPort, RepositoryQuery } from './repository.port';
 import { Repository } from 'typeorm';
-import { EntityMapper } from '../entity.mapper';
+import { EntityOrmMapper } from '../entity-orm.mapper';
 
 export abstract class TypeormRepositoryBase<DomainEntity, OrmEntity>
   implements RepositoryPort<DomainEntity>
 {
-  protected constructor(
+  public constructor(
     protected readonly repository: Repository<OrmEntity>,
-    protected readonly entityMapper: EntityMapper<DomainEntity, OrmEntity>,
+    protected readonly entityMapper: EntityOrmMapper<DomainEntity, OrmEntity>,
   ) {}
 
   public async delete(entity: DomainEntity): Promise<DomainEntity> {
@@ -47,13 +44,13 @@ export abstract class TypeormRepositoryBase<DomainEntity, OrmEntity>
 
   public async save(entity: DomainEntity): Promise<DomainEntity> {
     const ormEntity = this.entityMapper.fromDomain(entity);
-    const savedOrmEntity = await this.repository.save(ormEntity);
-    return this.entityMapper.toDomain(savedOrmEntity);
+    await this.repository.save(ormEntity as any);
+    return this.entityMapper.toDomain(ormEntity);
   }
 
   public async saveMultiple(entities: DomainEntity[]): Promise<DomainEntity[]> {
     const ormEntities = this.entityMapper.fromDomain(entities);
-    const savedOrmEntities = await this.repository.save(ormEntities);
-    return this.entityMapper.toDomain(savedOrmEntities);
+    await this.repository.save(ormEntities as any);
+    return this.entityMapper.toDomain(ormEntities);
   }
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { EntityManager } from 'typeorm';
+import { EntityManager, EntityTarget } from 'typeorm';
 import { InjectEntityManager } from '@nestjs/typeorm';
 
 @Injectable()
@@ -8,4 +8,8 @@ export class EntityManagerProvider {
     @InjectEntityManager()
     public readonly entityManager: EntityManager,
   ) {}
+
+  public getRepository<T>(ormEntity: EntityTarget<T>) {
+    return this.entityManager.getRepository<T>(ormEntity);
+  }
 }
