@@ -1,10 +1,10 @@
 import { plainToClass } from 'class-transformer';
 import { Type } from '@nestjs/common';
 
-export class EntityMapper<DomainEntity, Entity> {
+export class EntityOrmMapper<DomainEntity = unknown, Entity = unknown> {
   public constructor(
-    private readonly domainEntity: Type,
-    private readonly entity: Type,
+    private readonly domainEntity: Type<DomainEntity>,
+    private readonly entity: Type<Entity>,
   ) {}
 
   public toDomain(entity: Entity[]): DomainEntity[];

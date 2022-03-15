@@ -4,7 +4,7 @@
   "description": "",
   "author": "",
   "private": true,
-  "license": "UNLICENSED",
+  "license": "MIT",
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
@@ -17,7 +17,11 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
-    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand"
+    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "migration:create": "ts-node ./node_modules/typeorm/cli migration:create -f src/config/db/database-migration-cli.config.ts -n migrations",
+    "migration:gen": "ts-node ./node_modules/typeorm/cli migration:generate -f src/config/db/database-migration-cli.config.ts -n migrations",
+    "migration:run": "ts-node ./node_modules/typeorm/cli migration:run -f src/config/db/database-migration-cli.config.ts",
+    "migration:all": "npm run migration:gen & npm run migration:run"
   },
   "dependencies": {
     "@nestjs/common": "^8.0.0",
@@ -32,12 +36,13 @@
     "env-var": "^7.1.1",
     "helmet": "^4.6.0",
     "moment": "^2.29.1",
+    "pg": "^8.7.3",
     "pluralize": "^8.0.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",
     "swagger-ui-express": "^4.1.6",
-    "typeorm": "^0.2.41"
+    "typeorm": "^0.2.45"
   },
   "devDependencies": {
     "@nestjs/cli": "^8.0.0",
