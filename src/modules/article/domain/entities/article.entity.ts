@@ -5,7 +5,7 @@ export class ArticleEntity {
 
   public body: string;
 
-  public userId: string;
+  public userId: number;
 
   public createdAt: Date;
 

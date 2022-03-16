@@ -13,7 +13,7 @@ export class Article extends ArticleEntity {
   public body: string;
 
   @Column()
-  public userId: string;
+  public userId: number;
 
   @Column('timestamptz')
   public createdAt: Date;

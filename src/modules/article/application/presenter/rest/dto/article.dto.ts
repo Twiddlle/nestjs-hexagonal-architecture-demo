@@ -13,7 +13,7 @@ export class ArticleDto extends ArticleEntity {
   public body: string;
 
   @ApiModelProperty()
-  public userId: string;
+  public userId: number;
 
   @ApiModelProperty()
   @Type(() => Date)

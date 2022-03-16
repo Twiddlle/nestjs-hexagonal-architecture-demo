@@ -3,6 +3,7 @@ import { get } from 'env-var';
 import { DbNamingStrategy } from './db-naming.strategy';
 import { TypeOrmOptionsFactory } from '@nestjs/typeorm/dist/interfaces/typeorm-options.interface';
 import { Article } from '../../modules/article/infrastructure/persistence/entity/article';
+import { User } from '../../modules/user/infrastructure/entity/user';
 
 export class DatabaseConfig implements TypeOrmOptionsFactory {
   public createTypeOrmOptions(): TypeOrmModuleOptions {
@@ -15,7 +16,7 @@ export class DatabaseConfig implements TypeOrmOptionsFactory {
       database: get('DB_NAME').required().asString(),
       logging: get('DB_LOGGING').asBool(),
       synchronize: false,
-      entities: [Article],
+      entities: [Article, User],
       namingStrategy: new DbNamingStrategy(),
     };
   }

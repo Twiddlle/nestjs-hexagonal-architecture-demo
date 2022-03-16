@@ -7,20 +7,20 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { EntityPresenterMapper } from '../../../../../common/application/presenter/entity-presenter.mapper';
-import { ArticleEntity } from '../../../domain/entities/article.entity';
-import { ArticleDto } from './dto/article.dto';
+import { ArticleFullDto } from './dto/article-full.dto';
+import { ArticleAggregate } from '../../../domain/aggregates/article.aggregate';
 
 @Controller('article')
 @ApiTags('Article')
 export class ArticleController {
   private readonly entityMapper = new EntityPresenterMapper(
-    ArticleEntity,
-    ArticleDto,
+    ArticleAggregate,
+    ArticleFullDto,
   );
 
   public constructor(private readonly articleService: ArticleService) {}
 
-  @ApiOkResponse({ type: ArticleDto })
+  @ApiOkResponse({ type: ArticleFullDto })
   @ApiQuery({ name: 'id', required: true })
   @ApiOperation({ operationId: 'findArticleById' })
   @Get('/')

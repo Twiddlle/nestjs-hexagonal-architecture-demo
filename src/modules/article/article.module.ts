@@ -6,7 +6,9 @@ import { EntityOrmMapper } from '../../common/infrastructure/persistence/entity-
 import { ArticleEntity } from './domain/entities/article.entity';
 import { AppConfigModule } from '../config/application/app-config.module';
 import { ArticleService } from './domain/service/article.service';
-import { ArticleController } from './application/presenter/restx/ArticleController';
+import { ArticleController } from './application/presenter/rest/ArticleController';
+import { ArticleUserRepository } from './infrastructure/persistence/article-user.repository';
+import { CqrsModule } from '@nestjs/cqrs';
 
 const articleRepository: Provider = {
   provide: ArticleRepository,
@@ -21,16 +23,26 @@ const articleRepository: Provider = {
 
 const articleService: Provider = {
   provide: ArticleService,
-  useFactory: (repository: ArticleRepository) => {
-    return new ArticleService(repository);
+  useFactory: (
+    articleRepo: ArticleRepository,
+    articleUserRepo: ArticleUserRepository,
+  ) => {
+    return new ArticleService(articleRepo, articleUserRepo);
   },
-  inject: [ArticleRepository],
+  inject: [ArticleRepository, ArticleUserRepository],
 };
 
+const providers: Provider[] = [
+  articleRepository,
+  articleService,
+  EntityManagerProvider,
+  ArticleUserRepository,
+];
+
 @Module({
-  imports: [AppConfigModule],
-  providers: [articleRepository, articleService, EntityManagerProvider],
-  exports: [articleRepository, articleService, EntityManagerProvider],
+  imports: [AppConfigModule, CqrsModule],
+  providers: providers,
+  exports: providers,
   controllers: [ArticleController],
 })
 export class ArticleModule {}
