@@ -2,11 +2,15 @@ import { ArticleRepositoryInterface } from '../ports/article-repository.interfac
 import { ArticleNotFoundException } from '../exception/article-not-found.exception';
 import { ArticleAggregate } from '../aggregates/article.aggregate';
 import { ArticleUserRepositoryInterface } from '../ports/article-user-repository.interface';
+import { ArticleEntity } from '../entities/article.entity';
+import { ArticleEventDispatcherInterface } from '../ports/article-event-dispatcher.interface';
+import { ArticleStoredEvent } from '../events/article-stored.event';
 
 export class ArticleService {
   public constructor(
     private readonly articleRepository: ArticleRepositoryInterface,
     private readonly articleUserRepository: ArticleUserRepositoryInterface,
+    private readonly articleEventDispatcher: ArticleEventDispatcherInterface,
   ) {}
 
   public async findById(id: number): Promise<ArticleAggregate> {
@@ -21,5 +25,11 @@ export class ArticleService {
       article,
       user,
     });
+  }
+
+  public async save(articleEntity: ArticleEntity): Promise<ArticleEntity> {
+    const article = await this.articleRepository.save(articleEntity);
+    this.articleEventDispatcher.dispatchStore(new ArticleStoredEvent(article));
+    return article;
   }
 }

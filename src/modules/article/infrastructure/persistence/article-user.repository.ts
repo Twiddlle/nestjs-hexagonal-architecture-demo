@@ -2,7 +2,7 @@ import { ArticleUserRepositoryInterface } from '../../domain/ports/article-user-
 import { Injectable } from '@nestjs/common';
 import { ArticleUserEntity } from '../../domain/entities/article-user.entity';
 import { QueryBus } from '@nestjs/cqrs';
-import { GetUserByIdQuery } from '../../domain/queries/get-user-by-id.query';
+import { GetUserByIdQuery } from '../../domain/query/get-user-by-id.query';
 
 @Injectable()
 export class ArticleUserRepository implements ArticleUserRepositoryInterface {

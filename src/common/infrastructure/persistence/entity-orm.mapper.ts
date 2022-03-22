@@ -15,8 +15,14 @@ export class EntityOrmMapper<DomainEntity = unknown, Entity = unknown> {
 
   public fromDomain(entity: DomainEntity): Entity;
   public fromDomain(entity: DomainEntity[]): Entity[];
+  public fromDomain(entity: Partial<DomainEntity>): Entity;
+  public fromDomain(entity: Partial<DomainEntity>[]): Entity[];
   public fromDomain(
-    domainEntity: DomainEntity | DomainEntity[],
+    domainEntity:
+      | DomainEntity
+      | DomainEntity[]
+      | Partial<DomainEntity>
+      | Partial<DomainEntity>[],
   ): Entity | Entity[] {
     return plainToClass(this.entity, domainEntity);
   }

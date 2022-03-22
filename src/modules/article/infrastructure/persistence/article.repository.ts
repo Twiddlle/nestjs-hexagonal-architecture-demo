@@ -5,4 +5,11 @@ import { ArticleRepositoryInterface } from '../../domain/ports/article-repositor
 
 export class ArticleRepository
   extends TypeormRepositoryBase<ArticleEntity, Article>
-  implements ArticleRepositoryInterface {}
+  implements ArticleRepositoryInterface
+{
+  public countArticlesByCriteria(
+    criteria: Record<keyof ArticleEntity | string, any>,
+  ): Promise<number> {
+    return this.repository.count(criteria);
+  }
+}

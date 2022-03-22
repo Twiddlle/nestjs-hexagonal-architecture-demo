@@ -10,9 +10,12 @@ import {
 import { ArticleNotFoundException } from '../../../article/domain/exception/article-not-found.exception';
 import { ArticleBaseException } from '../../../article/domain/exception/article-base.exception';
 import { AppConfig } from '../../../../config/app.config';
+import { GqlArgumentsHost, GqlExceptionFilter } from '@nestjs/graphql';
 
 @Catch()
-export class HttpExceptionFilter implements ExceptionFilter {
+export class HttpExceptionFilter
+  implements ExceptionFilter, GqlExceptionFilter
+{
   private readonly logger = new Logger(HttpExceptionFilter.name);
   private readonly exceptionMapping = new Map();
 
@@ -21,11 +24,19 @@ export class HttpExceptionFilter implements ExceptionFilter {
     this.exceptionMapping.set(ArticleBaseException, BadRequestException);
   }
 
-  public catch(error: Error | HttpException | any, host: ArgumentsHost): any {
+  public catch(
+    error: Error | HttpException | any,
+    host: ArgumentsHost | any,
+  ): any {
+    const exception = this.mapException(error);
+    if (host.contextType === 'graphql') {
+      GqlArgumentsHost.create(host);
+      return exception;
+    }
+
     const ctx = host.switchToHttp();
     const res = ctx.getResponse();
 
-    const exception = this.mapException(error);
     let resBody: any = {
       statusCode: 400,
       message: exception.message,

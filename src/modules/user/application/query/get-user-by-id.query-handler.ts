@@ -1,5 +1,5 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { GetUserByIdQuery } from '../../../article/domain/queries/get-user-by-id.query';
+import { GetUserByIdQuery } from '../../../article/domain/query/get-user-by-id.query';
 import { UserRepository } from '../../infrastructure/persistence/user-repository';
 
 @QueryHandler(GetUserByIdQuery)
