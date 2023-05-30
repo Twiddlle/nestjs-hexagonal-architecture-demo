@@ -27,7 +27,7 @@
     "@nestjs/apollo": "^10.0.8",
     "@nestjs/common": "^8.0.0",
     "@nestjs/config": "^1.1.0",
-    "@nestjs/core": "^8.0.0",
+    "@nestjs/core": "^9.0.5",
     "@nestjs/cqrs": "^8.0.1",
     "@nestjs/graphql": "^10.0.8",
     "@nestjs/passport": "^8.0.1",
