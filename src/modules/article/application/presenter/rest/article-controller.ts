@@ -37,7 +37,7 @@ export class ArticleController {
   @Get('/')
   public async findOne(@Query('id', new ValidationIntPipe()) id: number) {
     const articleEntity = await this.articleService.findById(id);
-    return this.entityMapper.fromDomain(articleEntity);
+    return ArticleFullDto.fromDomain(articleEntity);
   }
 
   @ApiOkResponse({ type: ArticleUpdateResultDto })

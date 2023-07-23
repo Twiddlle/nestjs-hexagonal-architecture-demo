@@ -1,19 +1,16 @@
 import { RepositoryPort, RepositoryQuery } from './repository.port';
 import { Repository } from 'typeorm';
-import { EntityOrmMapper } from '../entity-orm.mapper';
 
 export abstract class TypeormRepositoryBase<DomainEntity, OrmEntity>
   implements RepositoryPort<DomainEntity>
 {
-  public constructor(
-    protected readonly repository: Repository<OrmEntity>,
-    protected readonly entityMapper: EntityOrmMapper<DomainEntity, OrmEntity>,
-  ) {}
+  public constructor(protected readonly repository: Repository<OrmEntity>) {}
+
+  protected abstract fromDomain(entity: DomainEntity): OrmEntity;
+  protected abstract toDomain(entity: OrmEntity): DomainEntity;
 
   public async delete(entity: DomainEntity): Promise<DomainEntity> {
-    return this.entityMapper.toDomain(
-      await this.repository.remove(this.entityMapper.fromDomain(entity)),
-    );
+    return this.toDomain(await this.repository.remove(this.fromDomain(entity)));
   }
 
   public async find(
@@ -26,11 +23,11 @@ export abstract class TypeormRepositoryBase<DomainEntity, OrmEntity>
       skip: offset,
       take: limit,
     });
-    return this.entityMapper.toDomain(ormEntities);
+    return ormEntities.map(this.toDomain);
   }
 
   public async findById(id: number): Promise<DomainEntity> {
-    return this.entityMapper.toDomain(await this.repository.findOne(id));
+    return this.toDomain(await this.repository.findOne(id));
   }
 
   public async findOne(
@@ -39,18 +36,18 @@ export abstract class TypeormRepositoryBase<DomainEntity, OrmEntity>
     const ormEntity = await this.repository.findOne({
       where: query,
     });
-    return this.entityMapper.toDomain(ormEntity);
+    return this.toDomain(ormEntity);
   }
 
   public async save(entity: DomainEntity): Promise<DomainEntity> {
-    const ormEntity = this.entityMapper.fromDomain(entity);
+    const ormEntity = this.fromDomain(entity);
     await this.repository.save(ormEntity as any);
-    return this.entityMapper.toDomain(ormEntity);
+    return this.toDomain(ormEntity);
   }
 
   public async saveMultiple(entities: DomainEntity[]): Promise<DomainEntity[]> {
-    const ormEntities = this.entityMapper.fromDomain(entities);
+    const ormEntities = entities.map(this.fromDomain);
     await this.repository.save(ormEntities as any);
-    return this.entityMapper.toDomain(ormEntities);
+    return ormEntities.map(this.toDomain);
   }
 }

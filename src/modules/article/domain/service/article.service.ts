@@ -20,11 +20,10 @@ export class ArticleService {
     }
 
     const user = await this.articleUserRepository.findUserById(article.userId);
-
-    return Object.assign(new ArticleAggregate(), {
-      article,
-      user,
-    });
+    const articleAggregate = new ArticleAggregate();
+    articleAggregate.article = article;
+    articleAggregate.user = user;
+    return articleAggregate;
   }
 
   public async save(articleEntity: ArticleEntity): Promise<ArticleEntity> {
