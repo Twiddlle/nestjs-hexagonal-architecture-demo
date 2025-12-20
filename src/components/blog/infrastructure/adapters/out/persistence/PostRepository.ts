@@ -1,5 +1,5 @@
 import { Post } from 'src/components/blog/domain/entities/Post';
-import { PostRepositoryInterface } from 'src/components/blog/domain/ports/persistence/PostRepositoryInterface';
+import { PostRepositoryInterface } from 'src/components/blog/domain/ports/out/persistence/PostRepositoryInterface';
 import { DbType } from 'src/db/dbTypes';
 import { eq } from 'drizzle-orm';
 import { posts } from 'src/db/schema';

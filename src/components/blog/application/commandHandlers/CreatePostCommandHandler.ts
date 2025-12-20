@@ -5,7 +5,7 @@ import {
   QueryBus,
 } from '@nestjs/cqrs';
 import { CreatePostCommand } from 'src/components/shared/application/commands/CreatePostCommand';
-import { PostRepositoryInterface } from 'src/components/blog/domain/ports/persistence/PostRepositoryInterface';
+import { PostRepositoryInterface } from 'src/components/blog/domain/ports/out/persistence/PostRepositoryInterface';
 import { Inject } from '@nestjs/common';
 import { GetUserQuery } from 'src/components/shared/application/queries/GetUserQuery';
 import { CreateUserCommand } from 'src/components/shared/application/commands/CreateUserCommand';

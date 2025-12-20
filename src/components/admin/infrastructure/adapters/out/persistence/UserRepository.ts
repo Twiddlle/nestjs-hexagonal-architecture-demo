@@ -1,5 +1,5 @@
 import { User } from 'src/components/admin/domain/entities/User';
-import { UserRepositoryInterface } from 'src/components/admin/domain/ports/persistence/UserRepositoryInterface';
+import { UserRepositoryInterface } from 'src/components/admin/domain/ports/out/persistence/UserRepositoryInterface';
 import { DbType } from 'src/db/dbTypes';
 import { eq } from 'drizzle-orm';
 import { users } from 'src/db/schema';

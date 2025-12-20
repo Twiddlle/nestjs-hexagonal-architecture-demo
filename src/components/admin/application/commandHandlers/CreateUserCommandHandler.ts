@@ -1,6 +1,6 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { CreateUserCommand } from 'src/components/shared/application/commands/CreateUserCommand';
-import { UserRepositoryInterface } from 'src/components/admin/domain/ports/persistence/UserRepositoryInterface';
+import { UserRepositoryInterface } from 'src/components/admin/domain/ports/out/persistence/UserRepositoryInterface';
 import { Inject } from '@nestjs/common';
 
 @CommandHandler(CreateUserCommand)

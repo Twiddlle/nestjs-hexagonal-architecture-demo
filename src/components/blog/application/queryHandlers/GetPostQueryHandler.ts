@@ -1,8 +1,8 @@
 import { IQueryHandler, QueryBus, QueryHandler } from '@nestjs/cqrs';
 import { GetPostQuery } from 'src/components/shared/application/queries/GetPostQuery';
 import { PostAggregate } from 'src/components/blog/domain/aggregates/PostAggregate';
-import { PostRepositoryInterface } from 'src/components/blog/domain/ports/persistence/PostRepositoryInterface';
-import { UserRepositoryInterface } from 'src/components/admin/domain/ports/persistence/UserRepositoryInterface';
+import { PostRepositoryInterface } from 'src/components/blog/domain/ports/out/persistence/PostRepositoryInterface';
+import { UserRepositoryInterface } from 'src/components/admin/domain/ports/out/persistence/UserRepositoryInterface';
 import { Inject } from '@nestjs/common';
 import { GetUserQuery } from 'src/components/shared/application/queries/GetUserQuery';
 

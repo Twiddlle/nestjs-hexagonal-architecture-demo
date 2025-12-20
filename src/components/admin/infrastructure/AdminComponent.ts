@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { GetUserQueryHandler } from 'src/components/admin/application/queryHandlers/GetUserQueryHandler';
-import { UserRepository } from 'src/components/admin/infrastructure/ports/persistence/UserRepository';
+import { UserRepository } from 'src/components/admin/infrastructure/adapters/out/persistence/UserRepository';
 import {
   DRIZZLE_PROVIDER,
   OrmModule,

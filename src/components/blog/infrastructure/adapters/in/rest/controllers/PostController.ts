@@ -10,9 +10,9 @@ import {
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { GetPostQuery } from 'src/components/shared/application/queries/GetPostQuery';
 import { ApiResponse } from '@nestjs/swagger';
-import { PostResponseDto } from 'src/components/blog/infrastructure/http/rest/dtos/PostResponseDto';
-import { PostCreateResponseDto } from 'src/components/blog/infrastructure/http/rest/dtos/PostCreateResponseDto';
-import { PostCreateRequestDto } from 'src/components/blog/infrastructure/http/rest/dtos/PostCreateRequestDto';
+import { PostResponseDto } from 'src/components/blog/infrastructure/adapters/in/rest/dtos/PostResponseDto';
+import { PostCreateResponseDto } from 'src/components/blog/infrastructure/adapters/in/rest/dtos/PostCreateResponseDto';
+import { PostCreateRequestDto } from 'src/components/blog/infrastructure/adapters/in/rest/dtos/PostCreateRequestDto';
 import { CreatePostCommand } from 'src/components/shared/application/commands/CreatePostCommand';
 
 @Controller('posts')
