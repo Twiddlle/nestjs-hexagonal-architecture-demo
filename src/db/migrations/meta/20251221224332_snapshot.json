@@ -1,11 +1,11 @@
 {
-  "id": "93bed5e8-6eff-4e51-ab8f-d90a341b74b5",
+  "id": "a13b730d-6026-470c-a8a0-7853cd046037",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
-    "public.Posts": {
-      "name": "Posts",
+    "public.posts": {
+      "name": "posts",
       "schema": "",
       "columns": {
         "id": {
@@ -55,8 +55,8 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.Users": {
-      "name": "Users",
+    "public.users": {
+      "name": "users",
       "schema": "",
       "columns": {
         "id": {

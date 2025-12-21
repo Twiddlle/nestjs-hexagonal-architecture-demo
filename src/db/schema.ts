@@ -7,13 +7,13 @@ import {
 } from 'drizzle-orm/pg-core';
 import { UserRole } from 'src/components/admin/domain/entities/User';
 
-export const users = pgTable('Users', {
+export const users = pgTable('users', {
   id: serial('id').primaryKey(),
   name: varchar('name', { length: 256 }).notNull(),
   role: varchar('role', { length: 256 }).$type<UserRole>().notNull(),
 });
 
-export const posts = pgTable('Posts', {
+export const posts = pgTable('posts', {
   id: serial('id').primaryKey(),
   title: varchar('title', { length: 256 }).notNull(),
   body: varchar('body', { length: 256 }).notNull(),
